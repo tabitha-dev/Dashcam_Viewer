@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashcam Viewer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans:wght@400;500;700;900">
+    <style>
+        body { font-family: "Space Grotesk", "Noto Sans", sans-serif; }
+        .day-today .day-number { background-color: #fac638; color: #231e10; }
+        .day-with-footage .day-number { border: 2px solid #fac638; }
+        .day-selected .day-number { box-shadow: 0 0 0 2px #fac638, inset 0 0 0 2px #fac638; }
+        .day-number { display:flex; align-items:center; justify-content:center; width: 100%; height:100%; border-radius: 50%; }
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+        .nav-link-main.active { color: #fac638; }
+        .quick-access-tab.active { border-bottom-color: #fac638; color: #ffffff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-[#231e10] text-white">
+    <div class="relative flex size-full min-h-screen flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Header -->
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#4a3f21] px-4 md:px-10 py-3 sticky top-0 bg-[#231e10]/80 backdrop-blur-sm z-50">
+                <div class="flex items-center gap-4 text-white">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-6 text-[#fac638]"><path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path></svg>
+                    <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Dashcam Viewer</h2>
+                </div>
+                <nav class="hidden md:flex items-center gap-9">
+                    <a class="nav-link-main text-white text-sm font-medium leading-normal cursor-pointer active" data-view="home">Home</a>
+                    <a class="nav-link-main text-white text-sm font-medium leading-normal cursor-pointer" data-view="upload">Upload</a>
+                    <a class="nav-link-main text-white text-sm font-medium leading-normal cursor-pointer" data-view="settings">Settings</a>
+                    <a class="nav-link-main text-white text-sm font-medium leading-normal cursor-pointer" data-view="help">Help</a>
+                </nav>
+            </header>
+
+            <main class="flex flex-1 justify-center py-5 px-4 md:px-10 lg:px-40">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                
+                    <!-- Home View Section -->
+                    <div id="home-view" class="view-section active">
+                        <div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-start justify-end p-6 md:p-10" style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCp-Hy_vTpHJ-JISkAYodBJYBzf3mlmkSjSyDK_9cRAzsJ1zHCTWzZd4zr83UBS1mkfKpAodnbMHRP-vlqaLPBcSa03tpaOs8qA58VYrbFlSNhBqOGL_GF2kSrRqKh9_eohkUUtnf5KgbG7dcLtyUMaGhkuG3Ysp1YI4Dp6b5JSnbgYOEQeE5jr6ZEnDSooLF51cjcJYTUkAsKxByHDGlmYz7ugBhIcTSMW8_B8dorAPkOW7uTACDfPOPKKY1nWlwJv6dtJlUvSPFU");'>
+                            <div class="flex flex-col gap-2 text-left">
+                                <h1 class="text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">Your Dashcam Footage, Organized</h1>
+                                <p class="text-white text-sm md:text-base font-normal leading-normal max-w-lg">Easily manage and review your dashcam recordings with our intuitive interface. Access your videos by date or browse your entire library.</p>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Key Features</h2>
+                        <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-4">
+                            <div class="flex flex-1 gap-3 rounded-lg border border-[#6a5a2f] bg-[#352d18] p-4 flex-col"><div class="text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path></svg></div><div class="flex flex-col gap-1"><h2 class="text-white text-base font-bold leading-tight">Calendar View</h2><p class="text-[#ccbc8e] text-sm font-normal leading-normal">Quickly find footage from specific dates.</p></div></div>
+                            <div id="library-feature-card" class="flex flex-1 gap-3 rounded-lg border border-[#6a5a2f] bg-[#352d18] p-4 flex-col cursor-pointer hover:border-[#fac638]"><div class="text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M164.44,105.34l-48-32A8,8,0,0,0,104,80v64a8,8,0,0,0,12.44,6.66l48-32a8,8,0,0,0,0-13.32ZM120,129.05V95l25.58,17ZM216,40H40A16,16,0,0,0,24,56V168a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,128H40V56H216V168Zm16,40a8,8,0,0,1-8,8H32a8,8,0,0,1,0-16H224A8,8,0,0,1,232,208Z"></path></svg></div><div class="flex flex-col gap-1"><h2 class="text-white text-base font-bold leading-tight">Video Library</h2><p class="text-[#ccbc8e] text-sm font-normal leading-normal">Browse your entire collection of recordings.</p></div></div>
+                            <div class="flex flex-1 gap-3 rounded-lg border border-[#6a5a2f] bg-[#352d18] p-4 flex-col"><div class="text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Z"></path></svg></div><div class="flex flex-col gap-1"><h2 class="text-white text-base font-bold leading-tight">Local Storage</h2><p class="text-[#ccbc8e] text-sm font-normal leading-normal">All footage is saved securely on your device.</p></div></div>
+                        </div>
+
+                        <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Quick Access</h2>
+                        <div id="quick-access-tabs" class="border-b border-[#6a5a2f] px-4">
+                            <div class="flex gap-8">
+                                <a class="quick-access-tab active flex flex-col items-center justify-center border-b-[3px] text-white pb-[13px] pt-4 cursor-pointer" data-tab="calendar-tab"><p class="text-sm font-bold tracking-[0.015em]">Calendar</p></a>
+                                <a class="quick-access-tab flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#ccbc8e] pb-[13px] pt-4 cursor-pointer" data-tab="library-tab"><p class="text-sm font-bold tracking-[0.015em]">Full Library</p></a>
+                            </div>
+                        </div>
+
+                        <div id="calendar-tab" class="tab-content active mt-6">
+                            <div class="flex items-center justify-between mb-4 px-4">
+                                <button id="prev-month-btn" class="p-2 rounded-full hover:bg-[#4a3f21]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path></svg></button>
+                                <h3 id="month-year-header" class="text-xl font-bold"></h3>
+                                <button id="next-month-btn" class="p-2 rounded-full hover:bg-[#4a3f21]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path></svg></button>
+                            </div>
+                            <div id="calendar-grid" class="grid grid-cols-7 gap-2 p-4 text-center"></div>
+                        </div>
+
+                        <div id="library-tab" class="tab-content mt-6">
+                            <div id="library-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+                        </div>
+
+                        <div id="video-display-area" class="mt-4">
+                            <!-- This area will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Upload View Section -->
+                    <div id="upload-view" class="view-section">
+                        <h2 class="text-white text-[32px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Upload New Footage</h2>
+                         <div class="space-y-6 p-4">
+                            <div>
+                                <label for="video-date" class="block text-sm font-medium text-white/90 mb-2">Date of Recording</label>
+                                <input type="date" id="video-date" class="form-input w-full md:w-1/2 rounded-lg bg-[#352d18] border-[#6a5a2f] text-white focus:ring-[#fac638] focus:border-[#fac638]">
+                            </div>
+                            <div class="upload-drop-zone p-8 text-center border-2 border-dashed border-[#4a3f21] rounded-lg" data-camera-type="front"><p class="font-bold">Drag & Drop Front Camera Files Here</p><p class="text-sm text-white/70">or</p><button class="upload-btn mt-2 bg-[#4a3f21] hover:bg-[#fac638] hover:text-[#231e10] text-white font-bold py-2 px-4 rounded-full">Select Front Cam Files</button><input type="file" class="hidden file-input" multiple accept="video/*"></div>
+                            <div class="upload-drop-zone p-8 text-center border-2 border-dashed border-[#4a3f21] rounded-lg" data-camera-type="back"><p class="font-bold">Drag & Drop Back Camera Files Here</p><p class="text-sm text-white/70">or</p><button class="upload-btn mt-2 bg-[#4a3f21] hover:bg-[#fac638] hover:text-[#231e10] text-white font-bold py-2 px-4 rounded-full">Select Back Cam Files</button><input type="file" class="hidden file-input" multiple accept="video/*"></div>
+                            <div id="upload-progress-container" class="hidden"><p id="upload-status">Uploading...</p><div class="w-full bg-[#4a3f21] rounded-full h-2.5 mt-2"><div id="upload-progress-bar" class="bg-[#fac638] h-2.5 rounded-full" style="width: 0%"></div></div></div>
+                         </div>
+                    </div>
+
+                    <!-- Settings View Section -->
+                     <div id="settings-view" class="view-section">
+                        <h2 class="text-white text-[32px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Settings</h2>
+                        <div class="px-4">
+                            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-2 pt-4">Storage</h3>
+                            <div class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"><div class="flex flex-col justify-center"><p class="text-white text-base font-medium leading-normal">Storage Limit</p><p class="text-[#ccbc8e] text-sm font-normal leading-normal">Set a limit for how much storage the app can use.</p></div><p class="text-white text-base font-normal leading-normal shrink-0">100 GB</p></div>
+                             <div class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"><div class="flex flex-col justify-center"><p class="text-white text-base font-medium leading-normal">Default Video Quality</p><p class="text-[#ccbc8e] text-sm font-normal leading-normal">Choose the default video quality for new recordings.</p></div><p class="text-white text-base font-normal leading-normal shrink-0">1080p</p></div>
+                            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-2 pt-4">Account</h3>
+                             <div class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"><div class="flex flex-col justify-center"><p class="text-white text-base font-medium leading-normal">Clear All Local Data</p><p class="text-[#ccbc8e] text-sm font-normal leading-normal">Permanently delete all videos and settings from this browser.</p></div><button id="clear-data-btn" class="bg-red-600/80 hover:bg-red-500 text-white text-sm font-bold py-2 px-4 rounded-lg">Clear Data</button></div>
+                        </div>
+                    </div>
+
+                     <!-- Help/Guide View Section -->
+                    <div id="help-view" class="view-section">
+                        <h2 class="text-white text-[32px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">How to Use Dashcam Viewer</h2>
+                        <div class="px-4 space-y-8 text-white/90">
+                            <div>
+                                <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-2 pt-4 border-b border-b-[#4a3f21]">Getting Started: First-Time Use</h3>
+                                <ol class="list-decimal list-inside space-y-2 mt-4">
+                                    <li><span class="font-bold">Save the File:</span> Save this application as an HTML file on your computer (e.g., <code class="bg-[#352d18] px-1 rounded-md">dashcam_viewer.html</code>).</li>
+                                    <li><span class="font-bold">Open in Browser:</span> Double-click the saved file. It will open in your web browser. Everything runs locally on your device.</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-2 pt-4 border-b border-b-[#4a3f21]">How to Upload Your Footage</h3>
+                                <ol class="list-decimal list-inside space-y-2 mt-4">
+                                    <li>Navigate to the <a class="inline-link" data-view="upload">Upload</a> page using the link in the header.</li>
+                                    <li><span class="font-bold">Select the Date:</span> Use the "Date of Recording" selector to choose the correct date for the videos. This is crucial for the calendar to work.</li>
+                                    <li><span class="font-bold">Add Video Files:</span> You have two options:
+                                        <ul class="list-disc list-inside ml-4 mt-2">
+                                            <li><span class="font-semibold">Drag & Drop:</span> Drag your front camera videos and drop them into the "Front Camera Files" box. Do the same for your back camera videos.</li>
+                                            <li><span class="font-semibold">Click to Select:</span> Click the "Select Files" button in each box to browse and select your videos. You can select multiple files at once.</li>
+                                        </ul>
+                                    </li>
+                                     <li><span class="font-bold">Upload Progress:</span> A progress bar will show the files being saved to your browser's local database.</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-2 pt-4 border-b border-b-[#4a3f21]">Viewing Your Footage</h3>
+                                 <ol class="list-decimal list-inside space-y-4 mt-4">
+                                    <li><span class="font-bold">Using the Calendar:</span>
+                                        <ul class="list-disc list-inside ml-4 mt-2">
+                                            <li>On the <a class="inline-link" data-view="home">Home</a> page, look at the calendar.</li>
+                                            <li>Dates with saved footage have a border. The current date is highlighted in yellow.</li>
+                                            <li>Click on any date with a border. The video players below will load the footage for that day.</li>
+                                             <li>Click the big play icon on a video to open it in a larger pop-up player.</li>
+                                        </ul>
+                                    </li>
+                                     <li><span class="font-bold">Using the Full Library:</span>
+                                        <ul class="list-disc list-inside ml-4 mt-2">
+                                            <li>On the Home page, click the "Full Library" tab under "Quick Access".</li>
+                                            <li>This shows all videos you've uploaded, sorted by date.</li>
+                                            <li>Click any video to open it in the pop-up player.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-2 pt-4 border-b border-b-[#4a3f21]">Managing Your Data</h3>
+                                 <ol class="list-decimal list-inside space-y-2 mt-4">
+                                    <li>Navigate to the <a class="inline-link" data-view="settings">Settings</a> page.</li>
+                                    <li><span class="font-bold">Clear All Data:</span> To delete every video and setting, click the "Clear Data" button. <span class="font-bold text-red-400">Warning: This action is permanent and cannot be undone.</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="video-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"><div class="bg-[#231e10] p-4 rounded-lg shadow-xl w-full max-w-4xl max-h-full flex flex-col"><div class="flex justify-between items-center mb-2 flex-shrink-0"><h3 id="modal-video-title" class="text-lg font-bold truncate"></h3><button id="close-modal-btn" class="text-2xl ml-4">&times;</button></div><div class="overflow-auto"><video id="modal-video-player" class="w-full rounded" controls autoplay></video></div></div></div>
+        <div id="message-box" class="hidden fixed bottom-5 right-5 bg-[#fac638] text-[#231e10] px-6 py-3 rounded-lg shadow-lg z-50"><p id="message-box-text"></p></div>
+    </div>
+
+<script type="module">
+    const App = {
+        state: { db: null, currentView: 'home', currentMonth: new Date().getMonth(), currentYear: new Date().getFullYear(), selectedDate: null },
+        db: {
+            DB_NAME: 'DashcamDB', STORE_NAME: 'videos',
+            init() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.DB_NAME, 1);
+                    request.onerror = (e) => reject(`Database error: ${e.target.errorCode}`);
+                    request.onupgradeneeded = (e) => {
+                        const store = e.target.result.createObjectStore(this.STORE_NAME, { keyPath: 'id', autoIncrement: true });
+                        store.createIndex('date', 'date', { unique: false });
+                    };
+                    request.onsuccess = (e) => { App.state.db = e.target.result; console.log("Database ready."); resolve(e.target.result); };
+                });
+            },
+            addFiles(files, date, cameraType) {
+                return new Promise((resolve, reject) => {
+                    const transaction = App.state.db.transaction(this.STORE_NAME, 'readwrite');
+                    const store = transaction.objectStore(this.STORE_NAME);
+                    let addedCount = 0;
+                    files.forEach(file => {
+                        const request = store.add({ date, cameraType, file, uploadedAt: new Date() });
+                        request.onerror = (e) => console.error(`Error adding ${file.name}:`, e.target.error);
+                        request.onsuccess = () => App.ui.updateUploadProgress(++addedCount, files.length);
+                    });
+                    transaction.oncomplete = () => resolve(addedCount);
+                    transaction.onerror = (e) => reject(`Transaction error: ${e.target.errorCode}`);
+                });
+            },
+            getVideosByDate(dateStr) {
+                 return new Promise((resolve, reject) => {
+                    const transaction = App.state.db.transaction(this.STORE_NAME, 'readonly');
+                    const index = transaction.objectStore(this.STORE_NAME).index('date');
+                    const request = index.getAll(dateStr);
+                    request.onerror = (e) => reject(`Request error: ${e.target.errorCode}`);
+                    request.onsuccess = () => resolve(request.result);
+                });
+            },
+            getAllVideos() {
+                return new Promise((resolve, reject) => {
+                    const transaction = App.state.db.transaction(this.STORE_NAME, 'readonly');
+                    const request = transaction.objectStore(this.STORE_NAME).getAll();
+                    request.onerror = e => reject(`Request error: ${e.target.errorCode}`);
+                    request.onsuccess = () => resolve(request.result);
+                });
+            },
+            clearAllData() {
+                return new Promise((resolve, reject) => {
+                    const transaction = App.state.db.transaction(this.STORE_NAME, 'readwrite');
+                    const request = transaction.objectStore(this.STORE_NAME).clear();
+                    request.onerror = e => reject(`Error clearing data: ${e.target.errorCode}`);
+                    transaction.oncomplete = () => resolve();
+                });
+            }
+        },
+        ui: {
+            elements: {
+                body: document.body,
+                mainNavLinks: document.querySelectorAll('.nav-link-main'),
+                views: document.querySelectorAll('.view-section'),
+                quickAccessTabs: document.querySelectorAll('.quick-access-tab'),
+                tabContents: document.querySelectorAll('.tab-content'),
+                libraryFeatureCard: document.getElementById('library-feature-card'),
+                calendarGrid: document.getElementById('calendar-grid'),
+                libraryGrid: document.getElementById('library-grid'),
+                monthYearHeader: document.getElementById('month-year-header'),
+                videoDisplayArea: document.getElementById('video-display-area'),
+                videoDateInput: document.getElementById('video-date'),
+                uploadProgressContainer: document.getElementById('upload-progress-container'),
+                uploadProgressBar: document.getElementById('upload-progress-bar'),
+                uploadStatus: document.getElementById('upload-status'),
+                videoModal: document.getElementById('video-modal'),
+                modalVideoPlayer: document.getElementById('modal-video-player'),
+                modalVideoTitle: document.getElementById('modal-video-title'),
+                messageBox: document.getElementById('message-box'),
+                messageBoxText: document.getElementById('message-box-text'),
+                clearDataBtn: document.getElementById('clear-data-btn'),
+            },
+            showView(viewId) {
+                App.state.currentView = viewId;
+                this.elements.views.forEach(view => view.classList.toggle('active', view.id === `${viewId}-view`));
+                this.elements.mainNavLinks.forEach(link => link.classList.toggle('active', link.dataset.view === viewId));
+            },
+            showTab(tabId) {
+                this.elements.tabContents.forEach(tab => tab.classList.toggle('active', tab.id === tabId));
+                this.elements.quickAccessTabs.forEach(link => {
+                    const isActive = link.dataset.tab === tabId;
+                    link.classList.toggle('active', isActive);
+                    link.classList.toggle('text-white', isActive);
+                    link.classList.toggle('text-[#ccbc8e]', !isActive);
+                });
+                if (tabId === 'library-tab') {
+                    this.renderLibrary();
+                    this.elements.videoDisplayArea.style.display = 'none';
+                } else {
+                    this.elements.videoDisplayArea.style.display = 'block';
+                    if(App.state.selectedDate) {
+                        this.renderVideosForDate(App.state.selectedDate);
+                    } else {
+                        this.renderInitialVideoPlayers();
+                    }
+                }
+            },
+            showMessage(message, duration = 3000) {
+                this.elements.messageBoxText.textContent = message;
+                this.elements.messageBox.classList.remove('hidden');
+                setTimeout(() => this.elements.messageBox.classList.add('hidden'), duration);
+            },
+            updateUploadProgress(current, total) {
+                const percent = total > 0 ? (current / total) * 100 : 0;
+                this.elements.uploadProgressBar.style.width = `${percent}%`;
+                this.elements.uploadStatus.textContent = `Uploading ${current} of ${total}...`;
+                this.elements.uploadProgressContainer.classList.remove('hidden');
+                if (current === total) {
+                    this.showMessage(`${total} file(s) uploaded successfully!`);
+                    setTimeout(() => this.elements.uploadProgressContainer.classList.add('hidden'), 1500);
+                }
+            },
+            createVideoPlayer(video, cameraType, titleOverride = null) {
+                const url = video ? URL.createObjectURL(video.file) : null;
+                const posterUrl = `https://placehold.co/1920x1080/352d18/6a5a2f?text=${encodeURIComponent(cameraType + ' Cam Footage')}`;
+                const hasVideo = !!video;
+                
+                const wrapper = document.createElement('div');
+                const title = titleOverride || `${cameraType} Cam Footage`;
+
+                wrapper.innerHTML = `<h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">${title}</h3><div class="p-4"><div class="relative flex items-center justify-center bg-cover bg-center aspect-video rounded-xl group" style="${!hasVideo ? 'background-image: url(' + posterUrl + ')' : ''}">${hasVideo ? `<video src="${url}" preload="metadata" class="w-full h-full object-cover rounded-xl bg-black"></video><button class="play-btn absolute flex shrink-0 items-center justify-center rounded-full size-16 bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path></svg></button>` : ``}</div></div>`;
+                if (hasVideo) wrapper.querySelector('.play-btn').addEventListener('click', () => this.playVideoInModal(video));
+                return wrapper;
+            },
+            playVideoInModal(video) {
+                const url = URL.createObjectURL(video.file);
+                this.elements.modalVideoPlayer.src = url;
+                this.elements.modalVideoTitle.textContent = `${video.date} - ${video.file.name}`;
+                this.elements.videoModal.classList.remove('hidden');
+            },
+            renderInitialVideoPlayers() {
+                 this.elements.videoDisplayArea.innerHTML = '';
+                 this.elements.videoDisplayArea.appendChild(this.createVideoPlayer(null, 'Front'));
+                 this.elements.videoDisplayArea.appendChild(this.createVideoPlayer(null, 'Back'));
+            },
+            async renderVideosForDate(dateStr) {
+                this.elements.videoDisplayArea.innerHTML = `<p class="text-center text-white/70 p-8">Loading footage for ${dateStr}...</p>`;
+                const videos = await App.db.getVideosByDate(dateStr);
+                const frontVideo = videos.find(v => v.cameraType === 'front');
+                const backVideo = videos.find(v => v.cameraType === 'back');
+                this.elements.videoDisplayArea.innerHTML = '';
+                this.elements.videoDisplayArea.appendChild(this.createVideoPlayer(frontVideo, 'Front'));
+                this.elements.videoDisplayArea.appendChild(this.createVideoPlayer(backVideo, 'Back'));
+            },
+            async renderLibrary() {
+                this.elements.libraryGrid.innerHTML = '<p class="text-white/70 col-span-full">Loading library...</p>';
+                const videos = await App.db.getAllVideos();
+                if (videos.length === 0) {
+                    this.elements.libraryGrid.innerHTML = '<p class="text-white/70 col-span-full">Your library is empty. Go to the Upload page to add videos.</p>';
+                    return;
+                }
+                this.elements.libraryGrid.innerHTML = '';
+                videos.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(video => {
+                     const card = this.createVideoPlayer(video, video.cameraType, `${video.date} - ${video.cameraType}`);
+                     this.elements.libraryGrid.appendChild(card);
+                });
+            }
+        },
+        calendar: {
+            async getFootageDates(year, month) {
+                 const transaction = App.state.db.transaction(App.db.STORE_NAME, 'readonly');
+                const index = transaction.objectStore(App.db.STORE_NAME).index('date');
+                const range = IDBKeyRange.bound(`${year}-${String(month + 1).padStart(2, '0')}-01`, `${year}-${String(month + 2).padStart(2, '0')}-01`);
+                const request = index.getAllKeys(range);
+                return new Promise(resolve => { request.onsuccess = () => resolve(new Set(request.result)); });
+            },
+            async render(month, year) {
+                const { calendarGrid, monthYearHeader } = App.ui.elements;
+                calendarGrid.innerHTML = '';
+                monthYearHeader.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+                const datesWithFootage = await this.getFootageDates(year, month);
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const today = new Date();
+                const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => { calendarGrid.innerHTML += `<div class="font-bold text-white/70 text-sm h-12 flex items-center justify-center">${day}</div>`; });
+                for (let i = 0; i < firstDay; i++) calendarGrid.appendChild(document.createElement('div'));
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const dayCell = document.createElement('div');
+                    const fullDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    dayCell.className = "h-12 w-full flex items-center justify-center";
+                    const dayButton = document.createElement('button');
+                    dayButton.className = "p-1 cursor-pointer rounded-full hover:bg-[#4a3f21] flex items-center justify-center w-12 h-12 transition-shadow";
+                    if (datesWithFootage.has(fullDateStr)) dayButton.classList.add('day-with-footage');
+                    if (fullDateStr === todayStr) dayButton.classList.add('day-today');
+                    if (App.state.selectedDate === fullDateStr) dayButton.classList.add('day-selected');
+                    dayButton.innerHTML = `<span class="day-number">${i}</span>`;
+                    dayButton.addEventListener('click', () => {
+                         App.state.selectedDate = fullDateStr;
+                         document.querySelectorAll('#calendar-grid .day-selected').forEach(el => el.classList.remove('day-selected'));
+                         dayButton.classList.add('day-selected');
+                         App.ui.renderVideosForDate(fullDateStr);
+                    });
+                    dayCell.appendChild(dayButton);
+                    calendarGrid.appendChild(dayCell);
+                }
+            }
+        },
+        init() {
+            this.ui.elements.body.addEventListener('click', (e) => {
+                 const navLink = e.target.closest('.nav-link-main, .inline-link');
+                 if(navLink && navLink.dataset.view) {
+                     e.preventDefault();
+                     this.ui.showView(navLink.dataset.view);
+                 }
+            });
+
+            this.ui.elements.quickAccessTabs.forEach(link => link.addEventListener('click', () => this.ui.showTab(link.dataset.tab)));
+            this.ui.elements.libraryFeatureCard.addEventListener('click', () => this.ui.showTab('library-tab'));
+            
+            document.getElementById('prev-month-btn').addEventListener('click', () => { this.state.currentMonth--; if (this.state.currentMonth < 0) { this.state.currentMonth = 11; this.state.currentYear--; } this.calendar.render(this.state.currentMonth, this.state.currentYear); });
+            document.getElementById('next-month-btn').addEventListener('click', () => { this.state.currentMonth++; if (this.state.currentMonth > 11) { this.state.currentMonth = 0; this.state.currentYear++; } this.calendar.render(this.state.currentMonth, this.state.currentYear); });
+            document.getElementById('close-modal-btn').addEventListener('click', () => { this.ui.elements.videoModal.classList.add('hidden'); this.ui.elements.modalVideoPlayer.pause(); this.ui.elements.modalVideoPlayer.src = ''; });
+            this.ui.elements.clearDataBtn.addEventListener('click', async () => {
+                if (confirm("Are you sure you want to delete all saved video data? This action cannot be undone.")) {
+                    try {
+                        await this.db.clearAllData();
+                        this.ui.showMessage("All data has been cleared.");
+                        this.calendar.render(this.state.currentMonth, this.state.currentYear);
+                        this.ui.renderInitialVideoPlayers();
+                    } catch (e) { this.ui.showMessage("Error clearing data.", 4000); }
+                }
+            });
+
+            document.querySelectorAll('.upload-btn').forEach(button => button.addEventListener('click', () => button.nextElementSibling.click()));
+            document.querySelectorAll('.file-input').forEach(input => input.addEventListener('change', (e) => this.handleFileUpload(e.target.files, e.target.closest('.upload-drop-zone').dataset.cameraType)));
+            document.querySelectorAll('.upload-drop-zone').forEach(zone => {
+                zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('border-[#fac638]', 'bg-[#4a3f21]'); });
+                zone.addEventListener('dragleave', (e) => { e.preventDefault(); zone.classList.remove('border-[#fac638]', 'bg-[#4a3f21]'); });
+                zone.addEventListener('drop', (e) => { e.preventDefault(); zone.classList.remove('border-[#fac638]', 'bg-[#4a3f21]'); this.handleFileUpload(e.dataTransfer.files, zone.dataset.cameraType); });
+            });
+
+            this.ui.elements.videoDateInput.value = new Date().toISOString().split('T')[0];
+            this.db.init().then(() => {
+                this.calendar.render(this.state.currentMonth, this.state.currentYear);
+                this.ui.renderInitialVideoPlayers();
+            }).catch(error => { console.error("Initialization Failed:", error); this.ui.showMessage("Error: Could not initialize database.", 6000); });
+        },
+        async handleFileUpload(files, cameraType) {
+            const date = this.ui.elements.videoDateInput.value;
+            if (!date) { this.ui.showMessage("Please select a date for the recording first.", 4000); return; }
+            try {
+                await this.db.addFiles(Array.from(files), date, cameraType);
+                if (this.state.currentView === 'home') this.calendar.render(this.state.currentMonth, this.state.currentYear);
+            } catch (error) { this.ui.showMessage(`Error during upload: ${error}`, 4000); }
+        }
+    };
+    App.init();
+</script>
+</body>
+</html>
